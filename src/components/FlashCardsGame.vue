@@ -3,13 +3,16 @@
     <div v-if="hskData.length > 0">
       <p>{{ hskData[currentIndex].simplified }}</p>
       <p v-if="showDefinition == true">{{ hskData[currentIndex].english }}</p>
-      <button @click="toggleDefinition">Show definition</button>
-      <button @click="nextCard">Next</button>
+      <button class="showDefinition" @click="toggleDefinition">
+        Show definition
+      </button>
+      <button class="nextCard" @click="nextCard">Next</button>
     </div>
   </div>
 </template>
 
 <script>
+import "../styles/flashCards.css";
 import HSK from "../json/HSK1.json";
 
 export default {
