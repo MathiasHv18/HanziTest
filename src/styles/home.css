@@ -1,0 +1,42 @@
+button {
+  height: 30px;
+  width: 100px;
+}
+
+button:hover {
+  color: #bb1919;
+  background-color: #aba2a2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0px;
+}
+
+p {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.Home {
+  display: flex;
+}
+
+.leftSide,
+.rightSide {
+
+  width: 50%;
+}
+
+.rightSide{
+  text-align: left;
+}
