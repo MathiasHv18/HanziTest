@@ -1,6 +1,47 @@
+.flashCard {
+  /* rest of your styles */
+  font-family: "Noto Sans SC", sans-serif;
+}
 .showDefinition,
+.showPinyin,
 .nextCard {
-  padding: 0px;
-  margin: 0px;
+  background-color: #4caf50; /* Green background */
+  border: none; /* No border */
+  color: white; /* White text */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* 3D effect */
+  transition-duration: 0.4s; /* Transition effects */
   height: 50px;
+  width: 130px;
+  vertical-align: middle; /* Align buttons vertically */
+  flex: 1; /* Make buttons use width equitably */
+}
+
+.showDefinition:hover,
+.nextCard:hover,
+.showPinyin:hover {
+  background-color: #45a049; /* Darker green when mouse hovers over */
+}
+.flashCard {
+  font-family: "Noto Serif SC", serif;
+  background-color: #2f4f4f;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  flex-direction: column;
+  justify-content: space-around;
+  height: 450px;
+  width: 900px;
+}
+
+.flashCard p:first-child {
+  font-size: 8em;
+  margin-bottom: auto;
 }

@@ -3,9 +3,13 @@
     <div v-if="hskData.length > 0">
       <p>{{ hskData[currentIndex].simplified }}</p>
       <p v-if="showDefinition == true">{{ hskData[currentIndex].english }}</p>
+      <p v-else>&nbsp</p>
+      <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
+      <p v-else>&nbsp</p>
       <button class="showDefinition" @click="toggleDefinition">
         Show definition
       </button>
+      <button class="showPinyin" @click="togglePinyin">Show pinyin</button>
       <button class="nextCard" @click="nextCard">Next</button>
     </div>
   </div>
@@ -21,6 +25,7 @@ export default {
       hskData: HSK,
       currentIndex: 0,
       showDefinition: false,
+      showPinyin: false,
     };
   },
   methods: {
@@ -33,6 +38,9 @@ export default {
     },
     toggleDefinition() {
       this.showDefinition = !this.showDefinition;
+    },
+    togglePinyin() {
+      this.showPinyin = !this.showPinyin;
     },
   },
 };
