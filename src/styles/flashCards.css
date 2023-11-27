@@ -1,10 +1,12 @@
 .flashCard {
-  /* rest of your styles */
   font-family: "Noto Sans SC", sans-serif;
+  flex: 70%;
 }
+
+.optionButton,
 .showDefinition,
 .showPinyin,
-.nextCard {
+.Submit {
   background-color: #4caf50; /* Green background */
   border: none; /* No border */
   color: white; /* White text */
@@ -23,7 +25,7 @@
 }
 
 .showDefinition:hover,
-.nextCard:hover,
+.Submit:hover,
 .showPinyin:hover {
   background-color: #45a049; /* Darker green when mouse hovers over */
 }
@@ -45,3 +47,21 @@
   font-size: 8em;
   margin-bottom: auto;
 }
+
+.button-green {
+  background-color: green;
+}
+
+.button-red {
+  background-color: red;
+  color: black;
+}
+
+.options {
+  flex: 30%;
+}
+
+.game {
+  display: flex;
+}
+
