@@ -3,20 +3,8 @@
     <div class="flashCard">
       <div v-if="hskData.length > 0">
         <p>{{ hskData[currentIndex].simplified }}</p>
-        <p v-if="showDefinition == true">{{ hskData[currentIndex].english }}</p>
-        <p v-else>&nbsp</p>
         <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
         <p v-else>&nbsp</p>
-        <button
-          class="showDefinition"
-          @click="toggleDefinition"
-          v-bind:class="{
-            'button-green': showDefinition,
-            'button-red': !showDefinition,
-          }"
-        >
-          Show definition
-        </button>
         <button
           class="showPinyin"
           @click="togglePinyin"
@@ -30,9 +18,16 @@
         <button class="Submit" @click="handleSubmit">Submit</button>
       </div>
     </div>
-    <button class="optionButton" v-for="(option, index) in options" :key="index">
-      {{ option }}
-    </button>
+    <div class="options">
+      <button
+        class="optionButton"
+        @click="handleSubmit(index)"
+        v-for="(option, index) in options"
+        :key="index"
+      >
+        {{ option }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -48,25 +43,22 @@ export default {
       showDefinition: true,
       showPinyin: true,
       options: [],
+      usedIndices: [],
     };
   },
   created() {
+    this.currentIndex = Math.floor(Math.random() * this.hskData.length);
     this.setOptions();
   },
   methods: {
-    Submit() {
-      if (this.currentIndex < this.hskData.length - 1) {
-        this.currentIndex++;
-      } else {
-        this.currentIndex = 0;
-      }
-    },
     toggleDefinition() {
       this.showDefinition = !this.showDefinition;
     },
+
     togglePinyin() {
       this.showPinyin = !this.showPinyin;
     },
+
     shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -74,6 +66,7 @@ export default {
       }
       return array;
     },
+
     setOptions() {
       const randomIncorrectAnswers = [];
       const correctAnswer = this.hskData[this.currentIndex].english;
@@ -89,10 +82,22 @@ export default {
       this.options = this.shuffleArray(this.options);
     },
 
-    handleSubmit(){
-      this.Submit();
+    handleSubmit(selectedIndex) {
+      const correctIndex = this.options.indexOf(
+        this.hskData[this.currentIndex].english
+      );
+      if (selectedIndex === correctIndex) {
+        console.log("Correct answer!");
+      } else {
+        console.log("Incorrect answer!");
+      }
+      this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+      while (this.usedIndices.includes(this.currentIndex)) {
+        this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+      }
+      this.usedIndices.push(this.currentIndex);
       this.setOptions();
-    }
+    },
   },
 };
 </script>

@@ -17,8 +17,8 @@
         <h1 class="instructionsGame">Instructions of the game:</h1>
         <p>
           You will be given a random Chinese word and you will have to choose,
-          from the sentences given, the one where the word is correctly used. 16
-          seconds will be given to answer each question.
+          from the words given, the correct one. The duration you have will
+          depend on the difficulty you choose.
         </p>
       </div>
     </div>

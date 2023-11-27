@@ -1,6 +1,5 @@
 .flashCard {
   font-family: "Noto Sans SC", sans-serif;
-  flex: 70%;
 }
 
 .optionButton,
@@ -57,11 +56,19 @@
   color: black;
 }
 
-.options {
-  flex: 30%;
-}
-
 .game {
   display: flex;
 }
 
+.options {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.optionButton {
+  flex: 1 0 45%; /* This will make the buttons take up approximately half the width of .options, allowing for two buttons per row. Adjust as needed. */
+  margin: 5px; /* Add some margin around the buttons */
+}
