@@ -1,6 +1,7 @@
 <template>
   <div class="game">
     <div class="flashCard">
+      <div class="displayScore">{{ score }}</div>
       <div class="triesLeft">
         <img
           class="heartIMG"
@@ -60,6 +61,7 @@ export default {
       options: [],
       usedIndices: [],
       heartsLeft: [1, 2, 3],
+      score: 0,
     };
   },
   created() {
@@ -99,9 +101,9 @@ export default {
     },
 
     detectGameOver() {
-      if (this.heartsLeft.length === 1) {
+      if (this.heartsLeft.length === 0) {
         console.log("Game over!");
-        this.$router.push("/finalScoreGame");
+        return true;
       }
     },
 
@@ -115,8 +117,12 @@ export default {
         this.hskData[this.currentIndex].english
       );
       if (this.detectGameOver()) {
-        return false;
+        this.$router.push({
+          name: "finalScoreGame",
+          params: { finalScore: this.score },
+        });
       } else if (this.selectedIndex === this.correctIndex) {
+        this.score = this.score + 20;
         return true;
       } else {
         this.removeHeart();
