@@ -72,3 +72,12 @@
   flex: 1 0 45%; /* This will make the buttons take up approximately half the width of .options, allowing for two buttons per row. Adjust as needed. */
   margin: 5px; /* Add some margin around the buttons */
 }
+
+.heartIMG {
+  height: 30px;
+}
+
+.triesLeft {
+  margin: 0px;
+  padding: 0px;
+}

@@ -1,6 +1,14 @@
 <template>
   <div class="game">
     <div class="flashCard">
+      <div class="triesLeft">
+        <img
+          class="heartIMG"
+          src="../assets/heartMC.png"
+          alt="triesLeft"
+          v-for="(heart, index) in heartsLeft"
+        />
+      </div>
       <div v-if="hskData.length > 0">
         <p>{{ hskData[currentIndex].simplified }}</p>
         <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
@@ -15,7 +23,6 @@
         >
           Show pinyin
         </button>
-        <button class="Submit" @click="handleSubmit">Submit</button>
       </div>
     </div>
     <div class="options">
@@ -24,6 +31,12 @@
         @click="handleSubmit(index)"
         v-for="(option, index) in options"
         :key="index"
+        :style="{
+          backgroundColor:
+            selectedIndex === index && selectedIndex !== correctIndex
+              ? 'red'
+              : '',
+        }"
       >
         {{ option }}
       </button>
@@ -39,11 +52,14 @@ export default {
   data() {
     return {
       hskData: HSK,
-      currentIndex: 0,
       showDefinition: true,
       showPinyin: true,
+      currentIndex: 0,
+      selectedIndex: null,
+      correctIndex: null,
       options: [],
       usedIndices: [],
+      heartsLeft: [1, 2, 3],
     };
   },
   created() {
@@ -82,21 +98,44 @@ export default {
       this.options = this.shuffleArray(this.options);
     },
 
-    handleSubmit(selectedIndex) {
-      const correctIndex = this.options.indexOf(
+    detectGameOver() {
+      if (this.heartsLeft.length === 1) {
+        console.log("Game over!");
+        this.$router.push("/finalScoreGame");
+      }
+    },
+
+    removeHeart() {
+      this.heartsLeft.pop();
+    },
+
+    isCorrect(selectedIndex) {
+      this.selectedIndex = selectedIndex;
+      this.correctIndex = this.options.indexOf(
         this.hskData[this.currentIndex].english
       );
-      if (selectedIndex === correctIndex) {
+      if (this.detectGameOver()) {
+        return false;
+      } else if (this.selectedIndex === this.correctIndex) {
+        return true;
+      } else {
+        this.removeHeart();
+        return false;
+      }
+    },
+
+    handleSubmit(selectedIndex) {
+      if (this.isCorrect(selectedIndex)) {
         console.log("Correct answer!");
+        this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+        while (this.usedIndices.includes(this.currentIndex)) {
+          this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+        }
+        this.usedIndices.push(this.currentIndex);
+        this.setOptions();
       } else {
         console.log("Incorrect answer!");
       }
-      this.currentIndex = Math.floor(Math.random() * this.hskData.length);
-      while (this.usedIndices.includes(this.currentIndex)) {
-        this.currentIndex = Math.floor(Math.random() * this.hskData.length);
-      }
-      this.usedIndices.push(this.currentIndex);
-      this.setOptions();
     },
   },
 };
