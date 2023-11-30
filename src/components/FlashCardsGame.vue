@@ -48,6 +48,11 @@
 <script>
 import "../styles/flashCards.css";
 import HSK from "../json/HSK1.json";
+import HSK2 from "../json/HSK2.json";
+import HSK3 from "../json/HSK3.json";
+import HSK4 from "../json/HSK4.json";
+import HSK5 from "../json/HSK5.json";
+import HSK6 from "../json/HSK6.json";
 
 export default {
   data() {
@@ -65,6 +70,20 @@ export default {
     };
   },
   created() {
+    const hsk = this.$route.params.hsk;
+    if (hsk === "1") {
+      this.hskData = HSK;
+    } else if (hsk === "2") {
+      this.hskData = HSK2;
+    } else if (hsk === "3") {
+      this.hskData = HSK3;
+    } else if (hsk === "4") {
+      this.hskData = HSK4;
+    } else if (hsk === "5") {
+      this.hskData = HSK5;
+    } else if (hsk === "6") {
+      this.hskData = HSK6;
+    }
     this.currentIndex = Math.floor(Math.random() * this.hskData.length);
     this.setOptions();
   },

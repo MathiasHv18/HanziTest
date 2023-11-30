@@ -7,7 +7,11 @@ import finalScoreGame from "./components/FinalScoreGame.vue";
 const routes = [
   { path: "/", component: Home },
   { path: "/chooseHSK", component: chooseHSK },
-  { path: "/flashCardsGame", component: flashCardsGame },
+  {
+    path: "/flashCardsGame/:hsk",
+    name: "FlashCardsGame",
+    component: flashCardsGame,
+  },
   {
     path: "/finalScoreGame/:finalScore",
     name: "finalScoreGame",

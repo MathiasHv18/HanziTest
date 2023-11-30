@@ -31,8 +31,8 @@ export default {
   name: "Home",
   methods: {
     handleClick() {
-      //this.$router.push("/chooseHSK");
-      this.$router.push("/FlashCardsGame");
+      this.$router.push("/chooseHSK");
+      //this.$router.push("/FlashCardsGame");
       console.log("Start app!");
     },
   },
