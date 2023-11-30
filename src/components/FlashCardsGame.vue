@@ -57,7 +57,7 @@ import HSK6 from "../json/HSK6.json";
 export default {
   data() {
     return {
-      hskData: HSK,
+      hskData: null,
       showDefinition: true,
       showPinyin: true,
       currentIndex: 0,
@@ -121,30 +121,29 @@ export default {
 
     detectGameOver() {
       if (this.heartsLeft.length === 0) {
+        this.$router.push({
+          name: "finalScoreGame",
+          params: { finalScore: this.score },
+        });
         console.log("Game over!");
         return true;
       }
     },
 
-    removeHeart() {
-      this.heartsLeft.pop();
-    },
-
     isCorrect(selectedIndex) {
+      this.detectGameOver();
       this.selectedIndex = selectedIndex;
       this.correctIndex = this.options.indexOf(
         this.hskData[this.currentIndex].english
       );
-      if (this.detectGameOver()) {
-        this.$router.push({
-          name: "finalScoreGame",
-          params: { finalScore: this.score },
-        });
-      } else if (this.selectedIndex === this.correctIndex) {
+
+      if (this.selectedIndex === this.correctIndex) {
         this.score = this.score + 20;
         return true;
       } else {
-        this.removeHeart();
+        this.heartsLeft.pop();
+        this.detectGameOver();
+
         return false;
       }
     },
