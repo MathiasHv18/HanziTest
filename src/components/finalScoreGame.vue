@@ -2,7 +2,7 @@
   <div class="game-over-screen">
     <h1>Game Over</h1>
     <p>Your final score is: {{ this.$route.params.finalScore }}</p>
-    <button @click="restartGame">Play Again</button>
+    <button @click="homePage">Go to home page</button>
   </div>
 </template>
 
@@ -12,8 +12,8 @@ export default {
     return {};
   },
   methods: {
-    restartGame() {
-      // Logic to restart the game goes here
+    homePage() {
+      this.$router.push("/");
     },
   },
 };
