@@ -47,7 +47,7 @@
 
 <script>
 import "../styles/flashCards.css";
-import HSK from "../json/HSK1.json";
+import HSK1 from "../json/HSK1.json";
 import HSK2 from "../json/HSK2.json";
 import HSK3 from "../json/HSK3.json";
 import HSK4 from "../json/HSK4.json";
@@ -58,8 +58,8 @@ export default {
   data() {
     return {
       hskData: null,
-      showDefinition: true,
-      showPinyin: true,
+      showDefinition: false,
+      showPinyin: false,
       currentIndex: 0,
       selectedIndex: null,
       correctIndex: null,
@@ -72,7 +72,7 @@ export default {
   created() {
     const hsk = this.$route.params.hsk;
     if (hsk === "1") {
-      this.hskData = HSK;
+      this.hskData = HSK1;
     } else if (hsk === "2") {
       this.hskData = HSK2;
     } else if (hsk === "3") {
@@ -131,7 +131,6 @@ export default {
     },
 
     isCorrect(selectedIndex) {
-      this.detectGameOver();
       this.selectedIndex = selectedIndex;
       this.correctIndex = this.options.indexOf(
         this.hskData[this.currentIndex].english

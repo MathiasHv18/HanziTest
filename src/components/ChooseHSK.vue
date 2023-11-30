@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button @click="goBack">Go back</button>
+  <div class="container">
+    <button @click="goBack" class="goBack">Go back</button>
     <h1>Choose your HSK level!</h1>
     <div class="button-container">
       <button class="HSK1" @click="getHSK(1)">HSK1</button>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import "../styles/chooseHSK.css";
 export default {
   data() {
     return {
@@ -37,3 +38,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+button:hover {
+  
+  transform: scale(1.1);
+}
+</style>
