@@ -2,7 +2,7 @@
   <div class="game-over-screen">
     <h1>Game Over</h1>
     <p>Your final score is: {{ this.$route.params.finalScore }}</p>
-    <button @click="homePage">Go to home page</button>
+    <button @click="homePage">Home page</button>
   </div>
 </template>
 

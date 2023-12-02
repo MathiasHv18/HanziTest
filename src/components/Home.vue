@@ -3,7 +3,7 @@
     <div class="leftSide">
       <h1>欢迎我的汉字测试</h1>
       <p>Welcome to my hanzi test!</p>
-      <button @click="handleClick">开始</button>
+      <button @click="handleClick">{{ message }}</button>
     </div>
     <div class="rightSide">
       <div class="HSKInfo">
@@ -29,6 +29,16 @@
 import "../styles/Home.css";
 export default {
   name: "Home",
+  data() {
+    return {
+      message: "开始",
+    };
+  },
+  mounted() {
+    setInterval(() => {
+      this.message = this.message === "开始" ? "Start" : "开始";
+    }, 1000);
+  },
   methods: {
     handleClick() {
       this.$router.push("/chooseHSK");

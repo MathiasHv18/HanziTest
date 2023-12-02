@@ -1,11 +1,13 @@
 button {
   height: 30px;
   width: 100px;
+  transition: transform 0.3s ease;
 }
 
 button:hover {
   color: #bb1919;
   background-color: #aba2a2;
+  transform: scale(1.1);
 }
 
 body {
@@ -33,10 +35,9 @@ p {
 
 .leftSide,
 .rightSide {
-
   width: 50%;
 }
 
-.rightSide{
+.rightSide {
   text-align: left;
 }

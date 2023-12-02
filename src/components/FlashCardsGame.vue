@@ -1,4 +1,5 @@
 <template>
+  <button @click="goBack" class="goBack">Go back</button>
   <div class="game">
     <div class="flashCard">
       <div class="displayScore">{{ score }}</div>
@@ -12,6 +13,11 @@
       </div>
       <div v-if="hskData.length > 0">
         <p>{{ hskData[currentIndex].simplified }}</p>
+      </div>
+      <div>
+        <button class="skip-button" @click="skipWord">
+          <font-awesome-icon con icon="arrow-right" />
+        </button>
         <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
         <p v-else>&nbsp</p>
         <button
@@ -126,7 +132,12 @@ export default {
           params: { finalScore: this.score },
         });
         console.log("Game over!");
-        return true;
+      } else if (this.usedIndices.length === this.hskData.length) {
+        this.$router.push({
+          name: "finalScoreGame",
+          params: { finalScore: this.score },
+        });
+        console.log("WIN!");
       }
     },
 
@@ -135,14 +146,13 @@ export default {
       this.correctIndex = this.options.indexOf(
         this.hskData[this.currentIndex].english
       );
-
       if (this.selectedIndex === this.correctIndex) {
         this.score = this.score + 20;
+        this.detectGameOver();
         return true;
       } else {
         this.heartsLeft.pop();
         this.detectGameOver();
-
         return false;
       }
     },
@@ -159,6 +169,22 @@ export default {
       } else {
         console.log("Incorrect answer!");
       }
+    },
+
+    skipWord() {
+      if (this.usedIndices.length === this.hskData.length) {
+        this.detectGameOver();
+      } else {
+        this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+        while (this.usedIndices.includes(this.currentIndex)) {
+          this.currentIndex = Math.floor(Math.random() * this.hskData.length);
+        }
+        this.usedIndices.push(this.currentIndex);
+        this.setOptions();
+      }
+    },
+    goBack() {
+      this.$router.push("/chooseHSK");
     },
   },
 };
