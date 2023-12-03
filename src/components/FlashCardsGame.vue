@@ -384,7 +384,6 @@ export default {
     font-size: 15px;
   }
   .options button {
-    margin: ;
     height: 10%;
     flex: 1 0 150px; /* Ajusta este valor según tus necesidades */
     font-size: 15px; /* Ajusta este valor según tus necesidades */
