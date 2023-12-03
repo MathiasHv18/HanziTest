@@ -8,7 +8,7 @@ const routes = [
   { path: "/", component: Home },
   { path: "/chooseHSK", component: chooseHSK },
   {
-    path: "/flashCardsGame/:hsk",
+    path: "/flashCardsGame/:hsk/:difficulty",
     name: "FlashCardsGame",
     component: flashCardsGame,
   },

@@ -1,8 +1,9 @@
 <template>
-  <button @click="goBack" class="goBack">Go back</button>
   <div class="game">
     <div class="flashCard">
+      <button @click="goBack" class="goBack">Go back</button>
       <div class="displayScore">{{ score }}</div>
+      <div class="displayTime">{{ timeRemaining }}</div>
       <div class="triesLeft">
         <img
           class="heartIMG"
@@ -52,7 +53,6 @@
 </template>
 
 <script>
-import "../styles/flashCards.css";
 import HSK1 from "../json/HSK1.json";
 import HSK2 from "../json/HSK2.json";
 import HSK3 from "../json/HSK3.json";
@@ -73,8 +73,10 @@ export default {
       usedIndices: [],
       heartsLeft: [1, 2, 3],
       score: 0,
+      timeRemaining: 0,
     };
   },
+
   created() {
     const hsk = this.$route.params.hsk;
     if (hsk === "1") {
@@ -123,6 +125,11 @@ export default {
       }
       this.options = [...randomIncorrectAnswers, correctAnswer];
       this.options = this.shuffleArray(this.options);
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(this.skipWord, this.getTimeout(this.difficulty));
+      this.startTimer();
     },
 
     detectGameOver() {
@@ -153,7 +160,6 @@ export default {
       } else {
         this.heartsLeft.pop();
         this.detectGameOver();
-        return false;
       }
     },
 
@@ -169,6 +175,10 @@ export default {
       } else {
         console.log("Incorrect answer!");
       }
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+      this.startTimer();
     },
 
     skipWord() {
@@ -182,10 +192,142 @@ export default {
         this.usedIndices.push(this.currentIndex);
         this.setOptions();
       }
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+      this.startTimer();
     },
+
     goBack() {
       this.$router.push("/chooseHSK");
+    },
+
+    getTimeout() {
+      switch (this.$route.params.difficulty) {
+        case "Easy":
+          return 13000;
+        case "Normal":
+          return 9000;
+        case "Hard":
+          return 3000;
+        default:
+          return 13000;
+      }
+    },
+    startTimer() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+      this.timeRemaining = this.getTimeout() / 1000;
+      this.timer = setInterval(() => {
+        this.timeRemaining--;
+        if (this.timeRemaining <= 0) {
+          this.heartsLeft.pop();
+          this.detectGameOver();
+          this.skipWord();
+        }
+      }, 1000);
     },
   },
 };
 </script>
+
+<style scoped>
+.flashCard {
+  font-size: 20px;
+  font-family: "Noto Serif SC", serif;
+  background-color: #2f4f4f;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center; /* Center content horizontally */
+  height: 550px;
+  width: 900px;
+  position: relative; /* Change this from fixed to relative */
+}
+
+.game {
+  display: flex;
+  justify-content: space-between; /* This will place items at the beginning and end of the container */
+  align-items: center; /* This will center items vertically */
+  height: 100vh;
+  padding: 0 10%; /* Add horizontal padding to prevent items from touching the edges */
+}
+.options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  min-width: 35%;
+  max-width: 35%; /* Limit the maximum width to 30% of the viewport width */
+}
+
+.optionButton {
+  flex: 1 0 auto;
+  margin: 20px;
+  padding: 5px;
+  width: 40%; /* This will make the buttons take up approximately half the width of .options, allowing for two buttons per row. Adjust as needed. */
+  height: 40%;
+  background-color: #134b15; /* Green background */
+  border: none; /* No border */
+  color: rgb(255, 251, 251); /* White text */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  font-size: 25px;
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* 3D effect */
+  transition-duration: 0.4s; /* Transition effects */
+}
+
+.goBack,
+.showDefinition,
+.showPinyin,
+.Submit {
+  background-color: rgb(175, 9, 17); /* Green background */
+  border: none; /* No border */
+  color: white; /* White text */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* 3D effect */
+  transition-duration: 0.4s; /* Transition effects */
+  height: 50px;
+  width: 130px;
+  vertical-align: middle; /* Align buttons vertically */
+}
+.flashCard p:first-child {
+  font-size: 8em;
+  margin-bottom: auto;
+}
+
+.showDefinition:hover,
+.Submit:hover,
+.showPinyin:hover {
+  background-color: #45a049; /* Darker green when mouse hovers over */
+}
+.button-green {
+  background-color: green;
+}
+
+.button-red {
+  background-color: red;
+  color: black;
+}
+.heartIMG {
+  height: 30px;
+}
+
+.triesLeft {
+  margin: 0px;
+  padding: 0px;
+}
+</style>

@@ -31,11 +31,14 @@ p {
 
 .Home {
   display: flex;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+
 }
 
 .leftSide,
 .rightSide {
   width: 50%;
+  
 }
 
 .rightSide {
