@@ -12,11 +12,6 @@ const routes = [
     name: "FlashCardsGame",
     component: flashCardsGame,
   },
-  {
-    path: "/finalScoreGame/:finalScore",
-    name: "finalScoreGame",
-    component: finalScoreGame,
-  },
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });
