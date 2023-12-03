@@ -1,9 +1,14 @@
 <template>
   <div class="game">
     <div class="flashCard">
-      <button @click="goBack" class="goBack">Go back</button>
-      <div class="displayScore">{{ score }}</div>
-      <div class="displayTime">{{ timeRemaining }}</div>
+      <div class="header">
+        <button @click="goBack" class="goBack">Go back</button>
+        <span>{{ usedIndices.length }}/{{ hskData.length }}</span>
+      </div>
+      <div class="Info">
+        <div class="displayScore">Score: {{ score }}</div>
+        <div class="displayTime">Time left: {{ timeRemaining }}</div>
+      </div>
       <div class="triesLeft">
         <img
           class="heartIMG"
@@ -16,9 +21,7 @@
         <p>{{ hskData[currentIndex].simplified }}</p>
       </div>
       <div>
-        <button class="skip-button" @click="skipWord">
-          <font-awesome-icon con icon="arrow-right" />
-        </button>
+        <button class="skip-button" @click="skipWord">Skip</button>
         <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
         <p v-else>&nbsp</p>
         <button
@@ -75,6 +78,19 @@ export default {
       score: 0,
       timeRemaining: 0,
     };
+  },
+  watch: {
+    $route() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+    next();
   },
 
   created() {
@@ -205,9 +221,9 @@ export default {
     getTimeout() {
       switch (this.$route.params.difficulty) {
         case "Easy":
-          return 13000;
+          return 8000;
         case "Normal":
-          return 9000;
+          return 5000;
         case "Hard":
           return 3000;
         default:
@@ -234,18 +250,16 @@ export default {
 
 <style scoped>
 .flashCard {
-  font-size: 20px;
+  font-size: 23px;
   font-family: "Noto Serif SC", serif;
   background-color: #2f4f4f;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center; /* Center content horizontally */
-  height: 550px;
-  width: 900px;
+  height: 80%;
+  width: 100%;
   position: relative; /* Change this from fixed to relative */
 }
 
@@ -254,7 +268,7 @@ export default {
   justify-content: space-between; /* This will place items at the beginning and end of the container */
   align-items: center; /* This will center items vertically */
   height: 100vh;
-  padding: 0 10%; /* Add horizontal padding to prevent items from touching the edges */
+  padding: 0 2%; /* Add horizontal padding to prevent items from touching the edges */
 }
 .options {
   display: flex;
@@ -285,6 +299,21 @@ export default {
   transition-duration: 0.4s; /* Transition effects */
 }
 
+.displayScore,
+.displayInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.Info {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 20px;
+}
 .goBack,
 .showDefinition,
 .showPinyin,
@@ -303,6 +332,15 @@ export default {
   height: 50px;
   width: 130px;
   vertical-align: middle; /* Align buttons vertically */
+}
+
+.goBack {
+  float: left;
+  display: inline-block;
+}
+.header {
+  width: 100%;
+  text-align: right;
 }
 .flashCard p:first-child {
   font-size: 8em;
@@ -329,5 +367,28 @@ export default {
 .triesLeft {
   margin: 0px;
   padding: 0px;
+}
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.option {
+  flex: 1 0 200px; /* Ajusta este valor según tus necesidades */
+  margin: 10px;
+}
+@media screen and (max-width: 900px) {
+  .flashCard {
+    height: 60%;
+    font-size: 15px;
+  }
+  .options button {
+    margin: ;
+    height: 10%;
+    flex: 1 0 150px; /* Ajusta este valor según tus necesidades */
+    font-size: 15px; /* Ajusta este valor según tus necesidades */
+    padding: 0px; /* Ajusta este valor según tus necesidades */
+  }
 }
 </style>

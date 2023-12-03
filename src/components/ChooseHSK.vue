@@ -69,7 +69,7 @@ export default {
 }
 .container {
   background-color: #2c3e50; /* Dark blue like a chalkboard */
-  padding: 40px; /* Increased padding */
+  padding: 10px; /* Increased padding */
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
   max-width: 800px; /* Increased max-width */
@@ -84,6 +84,8 @@ export default {
   justify-content: center;
   align-items: center;
   height: 35vh;
+  width: 60%;
+  margin: auto;
 }
 
 .button-container {
@@ -115,10 +117,8 @@ h1 {
 }
 
 .goBack {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 10px 20px;
+  align-self: flex-start;
+  padding: 0px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
@@ -130,5 +130,27 @@ h1 {
 
 button:hover {
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 80%;
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 480px) {
+
+  .container h1{
+    font-size: 1.5rem;
+  }
+  .container {
+    width: 100%;
+  }
+
+  .container button {
+    font-size: 0.8rem;
+    padding: 0px; /* Ajusta este valor según tus necesidades */
+  }
 }
 </style>

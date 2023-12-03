@@ -102,7 +102,6 @@ p {
 .Home {
   margin: 0;
   padding: 0;
-
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
@@ -135,7 +134,9 @@ p {
   }
 
   .textContainerRight {
-    width: 70%;
+    width: auto; /* Ajusta esto según tus necesidades */
+    word-wrap: break-word;
+    overflow: auto;
     padding: 20px;
     border: 2px solid #fff;
     border-radius: 10px;
@@ -162,6 +163,30 @@ p {
 
   .startButton:hover {
     background-color: #7c3014;
+  }
+
+  .textContainerLeft,
+  .textContainerRight {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 900px) {
+    .textContainerLeft h1,
+    .textContainerRight h1 {
+      font-size: 1.2em;
+      line-height: 1.1;
+      margin: 0px;
+    }
+    .textContainerLeft,
+    .textContainerRight {
+      width: 90%;
+    }
+
+    .textContainerLeft p,
+    .textContainerRight p {
+      font-size: 0.9em;
+      margin: 0;
+    }
   }
 }
 </style>
