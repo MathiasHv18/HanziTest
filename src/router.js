@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: "/finalScoreGame/:finalScore",
-    name: "finalScoreGame",
+    name: "FinalScoreGame",
     component: finalScoreGame,
   },
 ];

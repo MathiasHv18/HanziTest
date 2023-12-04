@@ -151,13 +151,13 @@ export default {
     detectGameOver() {
       if (this.heartsLeft.length === 0) {
         this.$router.push({
-          name: "finalScoreGame",
+          name: "FinalScoreGame",
           params: { finalScore: this.score },
         });
         console.log("Game over!");
       } else if (this.usedIndices.length === this.hskData.length) {
         this.$router.push({
-          name: "finalScoreGame",
+          name: "FinalScoreGame",
           params: { finalScore: this.score },
         });
         console.log("WIN!");
