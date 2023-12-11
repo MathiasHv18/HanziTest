@@ -1,3 +1,7 @@
+html, #app{
+  height: 100vh;
+}
+
 :root {
   line-height: 1.5;
   font-weight: 400;
@@ -10,8 +14,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#app {
-}
 
 * {
   margin: 0;

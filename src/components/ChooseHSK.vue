@@ -65,14 +65,13 @@ export default {
 }
 
 .difficulty-selector button {
-  margin: 0 10px; /* Add horizontal margin */
+  margin: 20px;
 }
 .container {
   background-color: #2c3e50; /* Dark blue like a chalkboard */
   padding: 10px; /* Increased padding */
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
-  max-width: 800px; /* Increased max-width */
   margin: 0 auto; /* Changed margin to 0 auto */
   color: rgb(0, 0, 0); /* Light color for text */
   position: absolute; /* Changed from relative to absolute */
@@ -83,12 +82,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 35vh;
+  height: 60%;
   width: 60%;
-  margin: auto;
 }
 
 .button-container {
+  margin: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -139,13 +138,13 @@ button:hover {
 }
 
 /* Estilos para pantallas pequeñas */
-@media screen and (max-width: 480px) {
-
-  .container h1{
+@media screen and (max-width: 620px) {
+  .container h1 {
     font-size: 1.5rem;
   }
   .container {
-    width: 100%;
+    width: 90%;
+    height: 80%;
   }
 
   .container button {
