@@ -249,6 +249,23 @@ export default {
 </script>
 
 <style scoped>
+.game {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* This will place items at the beginning and end of the container */
+  align-items: center; /* This will center items vertically */
+  height: 100vh;
+  padding: 0 2%; /* Add horizontal padding to prevent items from touching the edges */
+}
+.options {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 50%;
+}
 .flashCard {
   font-size: 23px;
   font-family: "Noto Serif SC", serif;
@@ -259,26 +276,9 @@ export default {
   align-items: center;
   flex-direction: column;
   height: 80%;
-  width: 100%;
+  width: 60%;
   position: relative; /* Change this from fixed to relative */
 }
-
-.game {
-  display: flex;
-  justify-content: space-between; /* This will place items at the beginning and end of the container */
-  align-items: center; /* This will center items vertically */
-  height: 100vh;
-  padding: 0 2%; /* Add horizontal padding to prevent items from touching the edges */
-}
-.options {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  height: 50%;
-}
-
 .optionButton {
   margin: 0px;
   width: 40%; /* This will make the buttons take up approximately half the width of .options, allowing for two buttons per row. Adjust as needed. */
@@ -389,6 +389,8 @@ export default {
     flex-direction: column;
     height: 100%;
     font-size: 15px;
+    flex: wrap;
+    justify-content: space-around;
   }
   .flashCard {
     margin-top: 5px;
@@ -397,9 +399,11 @@ export default {
     font-size: 10px;
   }
   .options {
-    height: 40%;
+    box-sizing: border-box;
+    height: 30%;
     width: 100%;
     font-size: 30px;
+    margin-bottom: 60px;
   }
   .options button {
     height: 20%;
