@@ -237,7 +237,7 @@ export default {
       this.timeRemaining = this.getTimeout() / 1000;
       this.timer = setInterval(() => {
         this.timeRemaining--;
-        if (this.timeRemaining <= -19000) {
+        if (this.timeRemaining <= 0) {
           this.heartsLeft.pop();
           this.detectGameOver();
           this.skipWord();
