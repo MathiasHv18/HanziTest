@@ -20,7 +20,7 @@
       <div v-if="hskData.length > 0">
         <p>{{ hskData[currentIndex].simplified }}</p>
       </div>
-      <div>
+      <div class="bottomFlashCard">
         <button class="skip-button" @click="skipWord">Skip</button>
         <p v-if="showPinyin == true">{{ hskData[currentIndex].pinyin }}</p>
         <p v-else>&nbsp</p>
@@ -74,7 +74,7 @@ export default {
       correctIndex: null,
       options: [],
       usedIndices: [],
-      heartsLeft: [1, 2, 3],
+      heartsLeft: [1, 2, 3, 4],
       score: 0,
       timeRemaining: 0,
     };
@@ -237,7 +237,7 @@ export default {
       this.timeRemaining = this.getTimeout() / 1000;
       this.timer = setInterval(() => {
         this.timeRemaining--;
-        if (this.timeRemaining <= 0) {
+        if (this.timeRemaining <= -19000) {
           this.heartsLeft.pop();
           this.detectGameOver();
           this.skipWord();
@@ -276,27 +276,33 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
-  min-width: 35%;
-  max-width: 35%; /* Limit the maximum width to 30% of the viewport width */
+  height: 50%;
 }
 
 .optionButton {
-  flex: 1 0 auto;
-  margin: 20px;
-  padding: 5px;
+  margin: 0px;
   width: 40%; /* This will make the buttons take up approximately half the width of .options, allowing for two buttons per row. Adjust as needed. */
-  height: 40%;
+  height: 25%;
   background-color: #134b15; /* Green background */
   border: none; /* No border */
   color: rgb(255, 251, 251); /* White text */
   text-align: center; /* Centered text */
-  text-decoration: none; /* No underline */
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer; /* Pointer/hand icon */
   border-radius: 12px; /* Rounded corners */
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* 3D effect */
   transition-duration: 0.4s; /* Transition effects */
+}
+
+.bottomFlashCard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.bottomFlashCard > p {
+  text-align: center;
 }
 
 .displayScore,
@@ -378,16 +384,26 @@ export default {
   flex: 1 0 200px; /* Ajusta este valor según tus necesidades */
   margin: 10px;
 }
-@media screen and (max-width: 900px) {
-  .flashCard {
-    height: 60%;
+@media (max-width: 900px) {
+  .game {
+    flex-direction: column;
+    height: 100%;
     font-size: 15px;
   }
+  .flashCard {
+    margin-top: 5px;
+    height: 60%;
+    width: 100%;
+    font-size: 10px;
+  }
+  .options {
+    height: 40%;
+    width: 100%;
+    font-size: 30px;
+  }
   .options button {
-    height: 10%;
-    flex: 1 0 150px; /* Ajusta este valor según tus necesidades */
-    font-size: 15px; /* Ajusta este valor según tus necesidades */
-    padding: 0px; /* Ajusta este valor según tus necesidades */
+    height: 20%;
+    font-size: 20px; /* Ajusta este valor según tus necesidades */
   }
 }
 </style>
