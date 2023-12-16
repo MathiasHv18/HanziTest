@@ -74,7 +74,7 @@ export default {
       correctIndex: null,
       options: [],
       usedIndices: [],
-      heartsLeft: [1, 2, 3, 4],
+      heartsLeft: [1, 2, 3],
       score: 0,
       timeRemaining: 0,
     };
